@@ -3,10 +3,11 @@ using Android.OS;
 using Android.Support.V7.App;
 using Android.Runtime;
 using Android.Widget;
+using Android.Content;
 
 namespace HealtyLifestyle
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
+    [Activity(Label = "Главное меню", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -15,6 +16,15 @@ namespace HealtyLifestyle
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
+
+            Button calculateBtn = FindViewById<Button>(Resource.Id.calculateKBJYBtn);
+
+
+            calculateBtn.Click += delegate {
+                Intent calculateKBJUIntent = new Intent(this, typeof(CalculateKBJUActivity));
+                StartActivity(calculateKBJUIntent);
+            };
+
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
