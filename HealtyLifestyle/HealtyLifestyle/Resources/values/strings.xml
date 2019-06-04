@@ -3,8 +3,4 @@
     <string name="app_name">HealtyLifestyle</string>
     <string name="action_settings">Settings</string>
     <string name="gender">Выберите пол</string>
-    <string-array name="genders_array">
-        <item>Мужской</item>
-        <item>Женский</item>
-    </string-array>
 </resources>
