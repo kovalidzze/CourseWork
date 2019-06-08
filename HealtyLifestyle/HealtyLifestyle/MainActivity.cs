@@ -19,6 +19,7 @@ namespace HealtyLifestyle
 
             Button calculateBtn = FindViewById<Button>(Resource.Id.calculateKBJYBtn);
 
+            
 
             calculateBtn.Click += delegate {
                 Intent calculateKBJUIntent = new Intent(this, typeof(CalculateKBJUActivity));
