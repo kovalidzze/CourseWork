@@ -63,6 +63,8 @@
     <Compile Include="CalculateKBJUActivity.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="Goal.cs" />
+    <Compile Include="Result.cs" />
+    <Compile Include="ResultsActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

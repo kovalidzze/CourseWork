@@ -48,12 +48,13 @@ namespace HealtyLifestyle
             {"Набор", goal.setting}
         };
 
-        private List<string> results = new List<string>
-        {
-            "asdasd",
-            "bbbbbb"
-        };
+        //private List<string> results = new List<string>
+        //{
+        //    "asdasd",
+        //    "bbbbbb"
+        //};
 
+        private List<Result> results = new List<Result>();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -63,6 +64,7 @@ namespace HealtyLifestyle
 
 
             Button mes = FindViewById<Button>(Resource.Id.button2);
+            var resultsBtn = FindViewById<Button>(Resource.Id.button3);
             EditText weightInput = FindViewById<EditText>(Resource.Id.widthInput);
             EditText growInput = FindViewById<EditText>(Resource.Id.growInput);
             EditText oldInput = FindViewById<EditText>(Resource.Id.oldInput);
@@ -92,21 +94,44 @@ namespace HealtyLifestyle
             goalSpinner.Adapter = adapterForGoalSpinner;
 
 
+            resultsBtn.Click += delegate {
+                Intent set = new Intent(this, typeof(ResultsActivity));
+                List<string> myResults = new List<string>();
+                foreach (var item in results)
+                {
+                    string name = item.Name;
+                    string cal = "Калл-" + item.Squirrels.ToString();
+                    string sq = "Белки-" + item.Squirrels.ToString();
+                    string f = "Жиры-" + item.Fats.ToString();
+                    string c = "Углеводы-" + item.Fats.ToString();
+                    string str = name + "\n" + cal + " " + sq + " " + f + " " + c;
+                    myResults.Add(str);
+                }
 
-
-
-
-
-
+                set.PutStringArrayListExtra(ResultsActivity.keyForList, myResults);
+                StartActivity(set);
+            };
 
             mes.Click += delegate {
                 AlertDialog.Builder alert = new AlertDialog.Builder(this);
+                DateTime dateTime = DateTime.UtcNow.Date;
                 var w = Convert.ToInt32(weightInput.Text);
                 var o = Convert.ToInt32(oldInput.Text);
                 var g = Convert.ToInt32(growInput.Text);
                 var k = activing[activingSpinner.SelectedItem.ToString()];
                 goal goal = goals[goalSpinner.SelectedItem.ToString()];
                 var res = Calculator.CalorieCalculation(w, g, o, k, goal);
+                int squirrels = (int)((res * 30) / 100) / 4;
+                int fats = (int)((res * 30) / 100) / 9;
+                int carbohydeates = (int)((res * 40) / 100) / 4 ;
+                int calories = (int)res;
+                string name = dateTime.ToString("F");
+
+
+                Result r = new Result(squirrels, fats, carbohydeates, calories,name);
+
+                results.Add(r);
+
                 alert.SetTitle("<2");
                 alert.SetMessage(res.ToString());
                 alert.SetNeutralButton("oK", delegate
