@@ -64,6 +64,9 @@
     <Compile Include="Calculator.cs" />
     <Compile Include="Goal.cs" />
     <Compile Include="Result.cs" />
+    <Compile Include="Results.cs" />
+    <Compile Include="JsonWorkspace.cs" />
+    <Compile Include="ITable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -105,6 +108,9 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
     <PackageReference Include="Crosslight.Xamarin.Android.Support.v7.AppCompat">
       <Version>25.3.1</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

@@ -10,6 +10,10 @@ namespace HealtyLifestyle
             {
                 return squirrels;
             }
+            set
+            {
+                squirrels = value;
+            }
         }
         private int fats;
         public int Fats
@@ -17,6 +21,10 @@ namespace HealtyLifestyle
             get
             {
                 return fats;
+            }
+            set
+            {
+                fats = value;
             }
         }
         private int carbohydeates;
@@ -26,6 +34,10 @@ namespace HealtyLifestyle
             {
                 return carbohydeates;
             }
+            set
+            {
+                carbohydeates = value;
+            }
         }
         private int calories;
         public int Calories
@@ -34,6 +46,10 @@ namespace HealtyLifestyle
             {
                 return calories;
             }
+            set
+            {
+                calories = value;
+            }
         }
         private string name;
         public string Name
@@ -41,6 +57,10 @@ namespace HealtyLifestyle
             get
             {
                 return name;
+            }
+            set
+            {
+                name = value;
             }
         }
 

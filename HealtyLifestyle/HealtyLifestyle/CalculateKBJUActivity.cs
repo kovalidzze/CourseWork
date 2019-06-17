@@ -49,7 +49,8 @@ namespace HealtyLifestyle
         };
 
 
-        private List<Result> results = new List<Result>();
+
+        private Results resultsTable = new Results();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -80,7 +81,6 @@ namespace HealtyLifestyle
             var adapterForGenderSpinner = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, gendersName);
             var adapterForActivingSpinner = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, activingNames);
             var adapterForGoalSpinner = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, goalNames);
-            //var adapterForResults = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, results);
 
             adapterForGenderSpinner.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             genderSpinner.Adapter = adapterForGenderSpinner;
@@ -90,11 +90,25 @@ namespace HealtyLifestyle
             goalSpinner.Adapter = adapterForGoalSpinner;
 
 
+            var resultsNames = new List<string>();
+
+
+            JsonLoader.Load(resultsTable);
+
+            foreach (var item in Results.GetAll()) // под андроед пишут непонятые гении. Юзайте веб разработку по андр)0))) 
+            {
+                var rName = item.Name;
+                resultsNames.Add(rName);
+            }
+            var adapterForResults = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, resultsNames);
+            resultsList.Adapter = adapterForResults; // кек да я говнокодер, сами под ведроед пишите
+
+
             resultsList.ItemClick += my_Click_matherFUCKER;
 
             void my_Click_matherFUCKER(object sender, AdapterView.ItemClickEventArgs e)
             {
-                Toast.MakeText(this, results[e.Position].Name, ToastLength.Short).Show(); // БЛЯТЬ АДДд
+                Toast.MakeText(this, Results.results[e.Position].Name, ToastLength.Short).Show(); // БЛЯТЬ АДДд
             }
 
             mes.Click += delegate {
@@ -118,16 +132,16 @@ namespace HealtyLifestyle
                     int fats = (int)((res * 30) / 100) / 9;
                     int carbohydeates = (int)((res * 40) / 100) / 4;
                     int calories = (int)res;
-                    Result r = new Result(squirrels, fats, carbohydeates, calories,name);
-                    results.Add(r);
-                    var resultsNames = new List<string>();
-                    foreach(var item in results) // под андроед пишут непонятые гении. Юзайте веб разработку по андр)0))) 
+                    Results.Add(new Result(squirrels, fats, carbohydeates, calories, name));
+                    resultsNames = new List<string>();
+                    foreach(var item in Results.GetAll()) // под андроед пишут непонятые гении. Юзайте веб разработку по андр)0))) 
                     {
                         var rName = item.Name;
                         resultsNames.Add(rName);
                     }
-                    var adapterForResults = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, resultsNames);
+                    adapterForResults = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, resultsNames);
                     resultsList.Adapter = adapterForResults; // кек да я говнокодер, сами под ведроед пишите
+                    JsonSaver.Save(resultsTable);
                 })
                 .SetNegativeButton("Cancel", delegate
                 {
