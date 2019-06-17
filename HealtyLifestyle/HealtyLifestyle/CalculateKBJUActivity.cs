@@ -48,11 +48,6 @@ namespace HealtyLifestyle
             {"Набор", goal.setting}
         };
 
-        //private List<string> results = new List<string>
-        //{
-        //    "asdasd",
-        //    "bbbbbb"
-        //};
 
         private List<Result> results = new List<Result>();
 
@@ -113,32 +108,37 @@ namespace HealtyLifestyle
             };
 
             mes.Click += delegate {
-                AlertDialog.Builder alert = new AlertDialog.Builder(this);
-                DateTime dateTime = DateTime.UtcNow.Date;
-                var w = Convert.ToInt32(weightInput.Text);
-                var o = Convert.ToInt32(oldInput.Text);
-                var g = Convert.ToInt32(growInput.Text);
-                var k = activing[activingSpinner.SelectedItem.ToString()];
-                goal goal = goals[goalSpinner.SelectedItem.ToString()];
-                var res = Calculator.CalorieCalculation(w, g, o, k, goal);
-                int squirrels = (int)((res * 30) / 100) / 4;
-                int fats = (int)((res * 30) / 100) / 9;
-                int carbohydeates = (int)((res * 40) / 100) / 4 ;
-                int calories = (int)res;
-                string name = dateTime.ToString("F");
-
-
-                Result r = new Result(squirrels, fats, carbohydeates, calories,name);
-
-                results.Add(r);
-
-                alert.SetTitle("<2");
-                alert.SetMessage(res.ToString());
-                alert.SetNeutralButton("oK", delegate
+                LayoutInflater layoutInflater = LayoutInflater.From(this);
+                View view = layoutInflater.Inflate(Resource.Layout.user_input_dialog_box, null);
+                Android.Support.V7.App.AlertDialog.Builder alertbuilder = new Android.Support.V7.App.AlertDialog.Builder(this);
+                alertbuilder.SetView(view);
+                var userdata = view.FindViewById<EditText>(Resource.Id.editText);
+                alertbuilder.SetCancelable(false)
+                .SetPositiveButton("Submit", delegate
                 {
-                    alert.Dispose();
+                    //Toast.MakeText(this, "Submit Input: " + userdata.Text, ToastLength.Short).Show(); // Сообщение для отлатки)0)0))
+
+                    var name = userdata.Text;
+                    var w = Convert.ToInt32(weightInput.Text);
+                    var o = Convert.ToInt32(oldInput.Text);
+                    var g = Convert.ToInt32(growInput.Text);
+                    var k = activing[activingSpinner.SelectedItem.ToString()];
+                    goal goal = goals[goalSpinner.SelectedItem.ToString()];
+                    var res = Calculator.CalorieCalculation(w, g, o, k, goal);
+                    int squirrels = (int)((res * 30) / 100) / 4;
+                    int fats = (int)((res * 30) / 100) / 9;
+                    int carbohydeates = (int)((res * 40) / 100) / 4;
+                    int calories = (int)res;
+                    Result r = new Result(squirrels, fats, carbohydeates, calories,name);
+                    results.Add(r);
+
+                })
+                .SetNegativeButton("Cancel", delegate
+                {
+                    alertbuilder.Dispose();
                 });
-                alert.Show();
+                Android.Support.V7.App.AlertDialog dialog = alertbuilder.Create();
+                dialog.Show();
             };
         }
     }
