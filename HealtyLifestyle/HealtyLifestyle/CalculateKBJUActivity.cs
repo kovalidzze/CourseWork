@@ -59,11 +59,11 @@ namespace HealtyLifestyle
 
 
             Button mes = FindViewById<Button>(Resource.Id.button2);
-            var resultsBtn = FindViewById<Button>(Resource.Id.button3);
             EditText weightInput = FindViewById<EditText>(Resource.Id.widthInput);
             EditText growInput = FindViewById<EditText>(Resource.Id.growInput);
             EditText oldInput = FindViewById<EditText>(Resource.Id.oldInput);
-
+            //ListView resultsList = FindViewById<ListView>(Resource.Id.resultsList);
+            var resultsList = FindViewById<ListView>(Resource.Id.myResultsList);
 
             List<string> gendersName = new List<string>();
             foreach (var item in genders) gendersName.Add(item.Key);
@@ -80,6 +80,7 @@ namespace HealtyLifestyle
             var adapterForGenderSpinner = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, gendersName);
             var adapterForActivingSpinner = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, activingNames);
             var adapterForGoalSpinner = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleSpinnerItem, goalNames);
+            //var adapterForResults = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, results);
 
             adapterForGenderSpinner.SetDropDownViewResource(Android.Resource.Layout.SimpleSpinnerDropDownItem);
             genderSpinner.Adapter = adapterForGenderSpinner;
@@ -89,23 +90,12 @@ namespace HealtyLifestyle
             goalSpinner.Adapter = adapterForGoalSpinner;
 
 
-            resultsBtn.Click += delegate {
-                Intent set = new Intent(this, typeof(ResultsActivity));
-                List<string> myResults = new List<string>();
-                foreach (var item in results)
-                {
-                    string name = item.Name;
-                    string cal = "Калл-" + item.Squirrels.ToString();
-                    string sq = "Белки-" + item.Squirrels.ToString();
-                    string f = "Жиры-" + item.Fats.ToString();
-                    string c = "Углеводы-" + item.Fats.ToString();
-                    string str = name + "\n" + cal + " " + sq + " " + f + " " + c;
-                    myResults.Add(str);
-                }
+            resultsList.ItemClick += my_Click_matherFUCKER;
 
-                set.PutStringArrayListExtra(ResultsActivity.keyForList, myResults);
-                StartActivity(set);
-            };
+            void my_Click_matherFUCKER(object sender, AdapterView.ItemClickEventArgs e)
+            {
+                Toast.MakeText(this, results[e.Position].Name, ToastLength.Short).Show(); // БЛЯТЬ АДДд
+            }
 
             mes.Click += delegate {
                 LayoutInflater layoutInflater = LayoutInflater.From(this);
@@ -117,7 +107,6 @@ namespace HealtyLifestyle
                 .SetPositiveButton("Submit", delegate
                 {
                     //Toast.MakeText(this, "Submit Input: " + userdata.Text, ToastLength.Short).Show(); // Сообщение для отлатки)0)0))
-
                     var name = userdata.Text;
                     var w = Convert.ToInt32(weightInput.Text);
                     var o = Convert.ToInt32(oldInput.Text);
@@ -131,7 +120,14 @@ namespace HealtyLifestyle
                     int calories = (int)res;
                     Result r = new Result(squirrels, fats, carbohydeates, calories,name);
                     results.Add(r);
-
+                    var resultsNames = new List<string>();
+                    foreach(var item in results) // под андроед пишут непонятые гении. Юзайте веб разработку по андр)0))) 
+                    {
+                        var rName = item.Name;
+                        resultsNames.Add(rName);
+                    }
+                    var adapterForResults = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, resultsNames);
+                    resultsList.Adapter = adapterForResults; // кек да я говнокодер, сами под ведроед пишите
                 })
                 .SetNegativeButton("Cancel", delegate
                 {
