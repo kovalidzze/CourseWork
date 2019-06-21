@@ -108,7 +108,22 @@ namespace HealtyLifestyle
 
             void my_Click_matherFUCKER(object sender, AdapterView.ItemClickEventArgs e)
             {
+                resultsNames = new List<string>();
                 Toast.MakeText(this, Results.results[e.Position].Name, ToastLength.Short).Show(); // БЛЯТЬ АДДд
+                //Results.GetAll().Remove(Results.results[e.Position]);
+                Results.GetAll().RemoveAt(e.Position);
+
+                foreach (var item in Results.GetAll()) // под андроед пишут непонятые гении. Юзайте веб разработку по андр)0))) 
+                {
+                    var rName = item.Name;
+                    var c = item.Calories;
+                    var a = item.Carbohydeates;
+                    var b = item.Fats;
+                    var d = item.Squirrels;
+                    resultsNames.Add(rName + "\n" + "c" + c + " a" + a + " b" + b + " d" + d);
+                }
+                adapterForResults = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, resultsNames);
+                resultsList.Adapter = adapterForResults; // кек да я говнокодер, сами под ведроед пишите
             }
 
             mes.Click += delegate {
@@ -137,7 +152,11 @@ namespace HealtyLifestyle
                     foreach(var item in Results.GetAll()) // под андроед пишут непонятые гении. Юзайте веб разработку по андр)0))) 
                     {
                         var rName = item.Name;
-                        resultsNames.Add(rName);
+                        var c = item.Calories;
+                        var a = item.Carbohydeates;
+                        var b = item.Fats;
+                        var d = item.Squirrels;
+                        resultsNames.Add(rName + "\n" + "c" + c + "a" + a + "b" + b + "d" + d);
                     }
                     adapterForResults = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, resultsNames);
                     resultsList.Adapter = adapterForResults; // кек да я говнокодер, сами под ведроед пишите

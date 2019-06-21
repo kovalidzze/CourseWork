@@ -17,4 +17,9 @@
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:id="@+id/receptsList" />
+    <ImageView 
+        android:src="@drawable/h" 
+        android:layout_width="match_parent" 
+        android:layout_height="163.5dp" 
+        android:id="@+id/imageView1" />   
 </LinearLayout>
