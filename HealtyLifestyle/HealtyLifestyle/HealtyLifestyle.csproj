@@ -68,6 +68,8 @@
     <Compile Include="JsonWorkspace.cs" />
     <Compile Include="ITable.cs" />
     <Compile Include="FuckUp.cs" />
+    <Compile Include="LL1.cs" />
+    <Compile Include="LL2.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -104,6 +106,8 @@
     <AndroidResource Include="Resources\drawable\h.png" />
     <AndroidResource Include="Resources\drawable\icon.png" />
     <AndroidResource Include="Resources\layout\FuckUpLayout.axml" />
+    <AndroidResource Include="Resources\layout\Layout1.axml" />
+    <AndroidResource Include="Resources\layout\Layout2.axml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
