@@ -1,19 +1,82 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent">
-	<TextView
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<ScrollView
 		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="10dip"
-		android:text="@string/gender"
-    />
-	<Spinner
-		android:id="@+id/spinner"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:prompt="@string/gender"
-    />
+		android:layout_height="wrap_content">
+		<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+			<TextView
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dip"
+				android:text="@string/gender" />
+			<Spinner
+				android:id="@+id/genderSpinner"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content" />
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/oldLabel"
+				android:text="Возраст" />
+			<android.support.design.widget.TextInputEditText
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/oldInput"
+				android:hint="Введите ваш возраст" />
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/widthLabel"
+				android:text="Вес" />
+			<android.support.design.widget.TextInputEditText
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/widthInput"
+				android:hint="Введите ваш вес" />
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/growLabel"
+				android:text="Рост" />
+			<android.support.design.widget.TextInputEditText
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/growInput"
+				android:hint="Введите ваш рост" />
+			<TextView
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dip"
+				android:text="Тип активности" />
+			<Spinner
+				android:id="@+id/activingSpinner"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content" />
+			<TextView
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="10dip"
+				android:text="Цель"
+				android:id="@+id/goalLabel" />
+			<Spinner
+				android:id="@+id/goalSpinner"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content" />
+			<Button
+				android:text="Рассчитать"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:id="@+id/button2" />
+			<ListView
+				android:layout_width="match_parent"
+				android:layout_height="147.0dp"
+				android:id="@+id/myResultsList" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-    <string name="app_name">HealtyLifestyle</string>
+    <string name="app_name">HealthyLifestyle</string>
     <string name="action_settings">Settings</string>
     <string name="gender">Выберите пол</string>
-    <string-array name="genders_array">
-        <item>Мужской</item>
-        <item>Женский</item>
-    </string-array>
 </resources>

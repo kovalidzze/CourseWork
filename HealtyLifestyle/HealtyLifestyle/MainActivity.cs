@@ -7,7 +7,7 @@ using Android.Content;
 
 namespace HealtyLifestyle
 {
-    [Activity(Label = "Главное меню", Theme = "@style/AppTheme", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -19,6 +19,7 @@ namespace HealtyLifestyle
 
             Button calculateBtn = FindViewById<Button>(Resource.Id.calculateKBJYBtn);
 
+            
 
             calculateBtn.Click += delegate {
                 Intent calculateKBJUIntent = new Intent(this, typeof(CalculateKBJUActivity));
