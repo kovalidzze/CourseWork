@@ -15,24 +15,39 @@ namespace HealtyLifestyle
     [Activity(Label = "FuckUp")]
     public class FuckUp : Activity
     {
-        private List<string> fuckUpDisp = new List<string>();
+
+
+
+
 
         private Dictionary<string, string> a = new Dictionary<string, string> {
             {"Hello", "word"}
         };
 
+        private void RefreshResults(ListView listView)
+        {
+            var b = new List<string>();
+            foreach (var item in a) // под андроед пишут непонятые гении. Юзайте веб разработку по андр)0))) 
+            {
+                b.Add(item.Key);
+            }
+
+            var adapterForResults = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, b);
+            listView.Adapter = adapterForResults; // кек да я говнокодер, сами под ведроед пишите
+        }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            var lv = FindViewById<ListView>(Resource.Id.fuckUpList);
-            foreach(var item in a)
-            {
-                fuckUpDisp.Add(item.Key);
-            }
+            SetContentView(Resource.Layout.FuckUpLayout);
 
-            var adapterForResults = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, fuckUpDisp);
-            lv.Adapter = adapterForResults; // кек да я говнокодер, сами под ведроед пишите
+
+
+            var lv = FindViewById<ListView>(Resource.Id.fuckUpList);
+
+
+            RefreshResults(lv);
         }
     }
 }

@@ -18,12 +18,19 @@ namespace HealtyLifestyle
             SetContentView(Resource.Layout.activity_main);
 
             Button calculateBtn = FindViewById<Button>(Resource.Id.calculateKBJYBtn);
+            var recBtn = FindViewById<Button>(Resource.Id.receptsList);
 
             
 
             calculateBtn.Click += delegate {
                 Intent calculateKBJUIntent = new Intent(this, typeof(CalculateKBJUActivity));
                 StartActivity(calculateKBJUIntent);
+            };
+
+            recBtn.Click += delegate {
+                Intent intent = new Intent(this, typeof(FuckUp));
+                StartActivity(intent);
+
             };
 
         }

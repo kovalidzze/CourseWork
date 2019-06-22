@@ -23,6 +23,7 @@ namespace HealtyLifestyle
 
             if (backingFile == null || !File.Exists(backingFile))
             {
+                return;
                 throw new Exception("ASA");
             }
 
