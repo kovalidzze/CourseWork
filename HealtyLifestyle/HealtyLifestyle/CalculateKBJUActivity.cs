@@ -128,6 +128,41 @@ namespace HealtyLifestyle
             }
 
             mes.Click += delegate {
+                var w = Convert.ToInt32(weightInput.Text);
+                var o = Convert.ToInt32(oldInput.Text);
+                var g = Convert.ToInt32(growInput.Text);
+                var k = activing[activingSpinner.SelectedItem.ToString()];
+                string l = "Исправьте:";
+                string exs = "";
+
+                if ((w < 30) || (w > 210))
+                {
+                    exs = exs + "Вес ";
+                }
+
+                if ((o < 10) || (o > 110))
+                {
+                    exs = exs + "Возраст ";
+                }
+
+                if ((g < 100) || (g > 220))
+                {
+                    exs = exs + "Рост ";
+                }
+
+                if (exs.Length != 0)
+                {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+                    alert.SetTitle("Ошибка");
+                    alert.SetMessage(l + exs);
+                    alert.SetNeutralButton("OK", delegate
+                    {
+                        alert.Dispose();
+                    });
+                    alert.Show();
+                    return;
+                }
                 LayoutInflater layoutInflater = LayoutInflater.From(this);
                 View view = layoutInflater.Inflate(Resource.Layout.user_input_dialog_box, null);
                 Android.Support.V7.App.AlertDialog.Builder alertbuilder = new Android.Support.V7.App.AlertDialog.Builder(this);
@@ -138,10 +173,6 @@ namespace HealtyLifestyle
                 {
                     //Toast.MakeText(this, "Submit Input: " + userdata.Text, ToastLength.Short).Show(); // Сообщение для отлатки)0)0))
                     var name = userdata.Text;
-                    var w = Convert.ToInt32(weightInput.Text);
-                    var o = Convert.ToInt32(oldInput.Text);
-                    var g = Convert.ToInt32(growInput.Text);
-                    var k = activing[activingSpinner.SelectedItem.ToString()];
                     goal goal = goals[goalSpinner.SelectedItem.ToString()];
                     var res = Calculator.CalorieCalculation(w, g, o, k, goal);
                     int squirrels = (int)((res * 30) / 100) / 4;
