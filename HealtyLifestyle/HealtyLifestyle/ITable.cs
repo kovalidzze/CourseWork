@@ -4,6 +4,9 @@
     {
         string GetFileName();
         void Load();
+
+
+
         string GetJson();
     }
 }
