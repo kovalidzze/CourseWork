@@ -49,8 +49,29 @@ namespace HealtyLifestyle
         };
 
 
+        private void RefreshResults(ListView listView)
+        {
+            foreach (var item in Results.GetAll()) // под андроед пишут непонятые гении. Юзайте веб разработку по андр)0))) 
+            {
+                var rName = item.Name;
+                var c = item.Calories;
+                var a = item.Carbohydeates;
+                var b = item.Fats;
+                var d = item.Squirrels;
+                resultsNames.Add(rName + "\n" + "c" + c + " a" + a + " b" + b + " d" + d);
+            }
+            var adapterForResults = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, resultsNames);
+            listView.Adapter = adapterForResults; // кек да я говнокодер, сами под ведроед пишите
+        }
+
+        private void AddResultToResultsList(Result r, ListView listView)
+        {
+            Results.Add(r);
+            RefreshResults(listView);
+        }
 
         private Results resultsTable = new Results();
+        private List<string> resultsNames = new List<string>();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -90,18 +111,8 @@ namespace HealtyLifestyle
             goalSpinner.Adapter = adapterForGoalSpinner;
 
 
-            var resultsNames = new List<string>();
-
-
-            JsonLoader.Load(resultsTable);
-
-            foreach (var item in Results.GetAll()) // под андроед пишут непонятые гении. Юзайте веб разработку по андр)0))) 
-            {
-                var rName = item.Name;
-                resultsNames.Add(rName);
-            }
-            var adapterForResults = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, resultsNames);
-            resultsList.Adapter = adapterForResults; // кек да я говнокодер, сами под ведроед пишите
+            JsonLoader.Load(resultsTable); //TODO
+            RefreshResults(resultsList);
 
 
             resultsList.ItemClick += my_Click_matherFUCKER;
@@ -110,20 +121,10 @@ namespace HealtyLifestyle
             {
                 resultsNames = new List<string>();
                 Toast.MakeText(this, Results.results[e.Position].Name, ToastLength.Short).Show(); // БЛЯТЬ АДДд
-                //Results.GetAll().Remove(Results.results[e.Position]);
-                Results.GetAll().RemoveAt(e.Position);
 
-                foreach (var item in Results.GetAll()) // под андроед пишут непонятые гении. Юзайте веб разработку по андр)0))) 
-                {
-                    var rName = item.Name;
-                    var c = item.Calories;
-                    var a = item.Carbohydeates;
-                    var b = item.Fats;
-                    var d = item.Squirrels;
-                    resultsNames.Add(rName + "\n" + "c" + c + " a" + a + " b" + b + " d" + d);
-                }
-                adapterForResults = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, resultsNames);
-                resultsList.Adapter = adapterForResults; // кек да я говнокодер, сами под ведроед пишите
+                Results.GetAll().RemoveAt(e.Position);
+                JsonSaver.Save(resultsTable);
+                RefreshResults(resultsList);
             }
 
             mes.Click += delegate {
@@ -147,19 +148,9 @@ namespace HealtyLifestyle
                     int fats = (int)((res * 30) / 100) / 9;
                     int carbohydeates = (int)((res * 40) / 100) / 4;
                     int calories = (int)res;
-                    Results.Add(new Result(squirrels, fats, carbohydeates, calories, name));
-                    resultsNames = new List<string>();
-                    foreach(var item in Results.GetAll()) // под андроед пишут непонятые гении. Юзайте веб разработку по андр)0))) 
-                    {
-                        var rName = item.Name;
-                        var c = item.Calories;
-                        var a = item.Carbohydeates;
-                        var b = item.Fats;
-                        var d = item.Squirrels;
-                        resultsNames.Add(rName + "\n" + "c" + c + "a" + a + "b" + b + "d" + d);
-                    }
-                    adapterForResults = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, resultsNames);
-                    resultsList.Adapter = adapterForResults; // кек да я говнокодер, сами под ведроед пишите
+
+                    AddResultToResultsList(new Result(squirrels, fats, carbohydeates, calories, name), resultsList);
+
                     JsonSaver.Save(resultsTable);
                 })
                 .SetNegativeButton("Cancel", delegate
