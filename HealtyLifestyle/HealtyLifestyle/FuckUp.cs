@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace HealtyLifestyle
 {
-    [Activity(Label = "FuckUp")]
+    [Activity(Label = "Рецепты")]
     public class FuckUp : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -38,7 +38,8 @@ namespace HealtyLifestyle
 
             var lv = FindViewById<ListView>(Resource.Id.fuckUpList);
             var b = new List<string>();
-            foreach (var item in a) // под андроед пишут непонятые гении. Юзайте веб разработку по андр)0))) 
+
+            foreach (var item in a) 
             {
                 b.Add(item.Key);
             }
@@ -46,12 +47,12 @@ namespace HealtyLifestyle
 
 
             var adapterForResults = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, b);
-            lv.Adapter = adapterForResults; // кек да я говнокодер, сами под ведроед пишите
+            lv.Adapter = adapterForResults; 
 
 
-            lv.ItemClick += my_Click_matherFUCKER;
+            lv.ItemClick += my_Click_list;
 
-            void my_Click_matherFUCKER(object sender, AdapterView.ItemClickEventArgs e)
+            void my_Click_list(object sender, AdapterView.ItemClickEventArgs e)
             {
                 //resultsNames = new List<string>();
                 //Toast.MakeText(this, Results.results[e.Position].Name, ToastLength.Short).Show(); // БЛЯТЬ АДДд

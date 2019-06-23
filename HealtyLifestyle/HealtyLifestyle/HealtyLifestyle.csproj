@@ -106,7 +106,6 @@
     <AndroidResource Include="Resources\drawable\h.png" />
     <AndroidResource Include="Resources\drawable\icon.png" />
     <AndroidResource Include="Resources\layout\FuckUpLayout.axml" />
-    <AndroidResource Include="Resources\layout\Layout1.axml" />
     <AndroidResource Include="Resources\layout\Layout2.axml" />
   </ItemGroup>
   <ItemGroup>
@@ -122,7 +121,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\drawable\" />
+    <AndroidResource Include="Resources\drawable\welcome.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Layout1.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

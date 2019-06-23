@@ -7,19 +7,36 @@
     android:gravity="center"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
+    <ImageView 
+        android:src="@drawable/welcome" 
+        android:layout_width="match_parent" 
+        android:layout_height="163.5dp" 
+        android:id="@+id/imageView1" /> 
 	<Button
+        android:gravity="center"
 		android:text="Вычислить КБЖУ"
-		android:layout_width="wrap_content"
+		android:layout_width="180dp"
 		android:layout_height="wrap_content"
 		android:id="@+id/calculateKBJYBtn" />
 	<Button
 		android:text="Список рецептов"
-		android:layout_width="wrap_content"
+		android:layout_width="180dp"
 		android:layout_height="wrap_content"
 		android:id="@+id/receptsList" />
-    <ImageView 
-        android:src="@drawable/h" 
-        android:layout_width="match_parent" 
-        android:layout_height="163.5dp" 
-        android:id="@+id/imageView1" />   
+    <Button
+		android:text="Тренировки"
+		android:layout_width="180dp"
+		android:layout_height="wrap_content"
+		android:id="@+id/receptsList" />
+    <Button
+		android:text="Советы по ведению ЗОЖ"
+		android:layout_width="180dp"
+		android:layout_height="wrap_content"
+		android:id="@+id/receptsList" />
+    <Button
+		android:text="Избранное"
+		android:layout_width="180dp"
+		android:layout_height="wrap_content"
+		android:id="@+id/receptsList" />
+      
 </LinearLayout>

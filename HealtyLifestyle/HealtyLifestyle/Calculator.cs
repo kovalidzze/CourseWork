@@ -20,7 +20,7 @@ namespace HealtyLifestyle
                 case goal.setting:
                     return result + (result * 15) / 100;
                 default:
-                    throw new ArgumentException("kek");
+                    throw new ArgumentException("Error");
             }
         }
     }

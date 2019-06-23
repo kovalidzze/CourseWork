@@ -24,7 +24,7 @@ namespace HealtyLifestyle
             if (backingFile == null || !File.Exists(backingFile))
             {
                 return;
-                throw new Exception("ASA");
+                throw new Exception("Error");
             }
 
             using (var reader = new StreamReader(backingFile, true))

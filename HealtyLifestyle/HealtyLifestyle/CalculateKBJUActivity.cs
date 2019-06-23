@@ -16,7 +16,7 @@ namespace HealtyLifestyle
     [Activity(Label = "CalculateKBJUActivity")]
     public class CalculateKBJUActivity : Activity
     {
-        private Dictionary<string, string> genders = new Dictionary<string, string>  // Отображаемое имя, значение для прогрера
+        private Dictionary<string, string> genders = new Dictionary<string, string>  
         {
             {"Мужской", "Мужской" },
             {"Женский", "Женский" }
@@ -35,7 +35,7 @@ namespace HealtyLifestyle
             {"Немного дневной активности", 1.3},
             {"Тренировки 4-5 раз в неделю", 1.4},
             {"Интенсивные тренировки", 1.5},
-            {"Ежедневные тренровки", 1.6},
+            {"Ежедневные тренировки", 1.6},
             {"Ежедневные интенсивные тренировки", 1.7},
             {"Тяжелая физ работа", 1.9}
         };
@@ -44,24 +44,24 @@ namespace HealtyLifestyle
         private Dictionary<string, goal> goals = new Dictionary<string, goal>
         {
             {"Поддержание", goal.keeping},
-            {"Похуйдение", goal.sliming},
+            {"Похудение", goal.sliming},
             {"Набор", goal.setting}
         };
 
 
         private void RefreshResults(ListView listView)
         {
-            foreach (var item in Results.GetAll()) // под андроед пишут непонятые гении. Юзайте веб разработку по андр)0))) 
+            foreach (var item in Results.GetAll()) 
             {
                 var rName = item.Name;
-                var c = item.Calories;
-                var a = item.Carbohydeates;
-                var b = item.Fats;
-                var d = item.Squirrels;
-                resultsNames.Add(rName + "\n" + "c" + c + " a" + a + " b" + b + " d" + d);
+                var ccal = item.Calories;
+                var belc = item.Carbohydeates;
+                var gir = item.Fats;
+                var ygl = item.Squirrels;
+                resultsNames.Add("Название: " + rName + "\n" + "Ккал: " + ccal + "\n" + "Белки: " + belc + " Жиры: " + gir + "\n" + "Углеводы: " + ygl);
             }
             var adapterForResults = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, resultsNames);
-            listView.Adapter = adapterForResults; // кек да я говнокодер, сами под ведроед пишите
+            listView.Adapter = adapterForResults; 
         }
 
         private void AddResultToResultsList(Result r, ListView listView)
@@ -111,16 +111,16 @@ namespace HealtyLifestyle
             goalSpinner.Adapter = adapterForGoalSpinner;
 
 
-            JsonLoader.Load(resultsTable); //TODO
+            JsonLoader.Load(resultsTable); 
             RefreshResults(resultsList);
 
 
-            resultsList.ItemClick += my_Click_matherFUCKER;
+            resultsList.ItemClick += my_Click_result;
 
-            void my_Click_matherFUCKER(object sender, AdapterView.ItemClickEventArgs e)
+            void my_Click_result(object sender, AdapterView.ItemClickEventArgs e)
             {
                 resultsNames = new List<string>();
-                Toast.MakeText(this, Results.results[e.Position].Name, ToastLength.Short).Show(); // БЛЯТЬ АДДд
+                Toast.MakeText(this, Results.results[e.Position].Name, ToastLength.Short).Show();
 
                 Results.GetAll().RemoveAt(e.Position);
                 JsonSaver.Save(resultsTable);
@@ -135,33 +135,50 @@ namespace HealtyLifestyle
                 string l = "Исправьте:";
                 string exs = "";
 
-                if ((w < 30) || (w > 210))
-                {
-                    exs = exs + "Вес ";
-                }
-
-                if ((o < 10) || (o > 110))
-                {
-                    exs = exs + "Возраст ";
-                }
-
-                if ((g < 100) || (g > 220))
-                {
-                    exs = exs + "Рост ";
-                }
-
-                if (exs.Length != 0)
+                if ((w == null) || (o == null) || (g == null)) // как это сделать + чтоб были только интовые значения введены
                 {
                     AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
                     alert.SetTitle("Ошибка");
-                    alert.SetMessage(l + exs);
+                    alert.SetMessage("Введены не все данные");
                     alert.SetNeutralButton("OK", delegate
                     {
                         alert.Dispose();
                     });
                     alert.Show();
                     return;
+                }
+
+                else
+                {
+                    if ((w < 30) || (w > 210))
+                    {
+                        exs = exs + "Вес ";
+                    }
+
+                    if ((o < 10) || (o > 110))
+                    {
+                        exs = exs + "Возраст ";
+                    }
+
+                    if ((g < 100) || (g > 220))
+                    {
+                        exs = exs + "Рост ";
+                    }
+
+                    if (exs.Length != 0)
+                    {
+                        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+                        alert.SetTitle("Ошибка");
+                        alert.SetMessage(l + exs);
+                        alert.SetNeutralButton("OK", delegate
+                        {
+                            alert.Dispose();
+                        });
+                        alert.Show();
+                        return;
+                    }
                 }
                 LayoutInflater layoutInflater = LayoutInflater.From(this);
                 View view = layoutInflater.Inflate(Resource.Layout.user_input_dialog_box, null);
